@@ -1,12 +1,21 @@
-# NutriCook AI
+# NutriCook AI 🥗
 
-NutriCook AI is an AI-powered nutritional cooking assistant designed to help you cook healthy and delicious meals.
+NutriCook AI is a smart food and health assistant that helps users decide what to eat based on their goals and available ingredients.
 
-## Project Structure
+## 🚀 Features
+- Personalized meal plans
+- Smart ingredient-based suggestions
+- Swap meals dynamically
+- Cook mode with step-by-step guidance
+- Grocery insights
 
-- `frontend/`: Contains the frontend assets (HTML, CSS, JS).
-- `backend/`: Contains the backend application (Python/Flask).
+## 🛠 Tech Stack
+- HTML, CSS, JavaScript
+- Node.js (Express)
 
-## Setup Instructions
+## 🎯 Vision
+To eliminate daily decision fatigue around food and promote healthier eating habits.
 
-TBA
+---
+
+Built for hackathon 🚀
