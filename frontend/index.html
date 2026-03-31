@@ -1,20 +1,142 @@
-<!DOCTYPE html>
+﻿<!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>NutriCook AI</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="styles.css">
 </head>
 <body>
-    <header>
-        <h1>Welcome to NutriCook AI</h1>
-    </header>
-    <main>
-        <div id="greeting-container">
-            <p>Your AI-powered nutritional cooking assistant.</p>
-        </div>
-    </main>
+    <div class="app-shell">
+        <header class="app-header">
+            <span class="brand-pill">NutriCook AI</span>
+        </header>
+
+        <main class="app-main">
+            <section id="login" class="app-section is-active" aria-labelledby="login-title">
+                <article class="card auth-card">
+                    <h1 id="login-title">NutriCook AI</h1>
+                    <p class="subtitle">Eat smart. Live better.</p>
+                    <form id="login-form" class="form-grid" novalidate>
+                        <label class="field-label" for="username">Username</label>
+                        <input id="username" class="field-input" type="text" placeholder="Enter username">
+
+                        <label class="field-label" for="password">Password</label>
+                        <input id="password" class="field-input" type="password" placeholder="Enter password">
+
+                        <p id="login-error" class="form-error" role="alert" aria-live="polite"></p>
+                        <button type="submit" class="btn btn-primary">Login / Register</button>
+                    </form>
+                </article>
+            </section>
+
+            <section id="onboarding" class="app-section" aria-labelledby="onboarding-title">
+                <article class="card auth-card">
+                    <h1 id="onboarding-title">Set your preferences</h1>
+                    <p class="subtitle">A few details to personalize your daily assistant.</p>
+                    <form id="onboarding-form" class="form-grid">
+                        <label class="field-label" for="goal">Goal</label>
+                        <select id="goal" class="field-input" required>
+                            <option value="">Select a goal</option>
+                            <option value="Weight Loss">Weight Loss</option>
+                            <option value="Muscle Gain">Muscle Gain</option>
+                            <option value="Healthy Eating">Healthy Eating</option>
+                        </select>
+
+                        <label class="field-label" for="diet">Diet</label>
+                        <select id="diet" class="field-input" required>
+                            <option value="">Select diet type</option>
+                            <option value="Veg">Veg</option>
+                            <option value="Non-Veg">Non-Veg</option>
+                            <option value="Eggetarian">Eggetarian</option>
+                        </select>
+
+                        <label class="field-label" for="restrictions">Restrictions</label>
+                        <select id="restrictions" class="field-input" required>
+                            <option value="">Select restriction</option>
+                            <option value="None">None</option>
+                            <option value="Low Sugar">Low Sugar</option>
+                            <option value="Low Carb">Low Carb</option>
+                        </select>
+
+                        <label class="field-label" for="ingredients-input">Ingredients (comma separated)</label>
+                        <input id="ingredients-input" class="field-input" type="text" placeholder="tomato, paneer, spinach">
+                        <div id="ingredients-chips" class="chips-wrap" aria-live="polite"></div>
+
+                        <button type="submit" class="btn btn-primary">Save & Continue</button>
+                    </form>
+                </article>
+            </section>
+
+            <section id="dashboard" class="app-section" aria-labelledby="dashboard-title">
+                <article class="dashboard-layout">
+                    <header class="dashboard-header">
+                        <h1 id="dashboard-title">NutriCook AI</h1>
+                        <p class="subtitle">Your daily AI food assistant</p>
+                    </header>
+
+                    <section class="card today-hero">
+                        <p id="today-greeting" class="hero-greeting">Good morning, there &#9728;&#65039;</p>
+                        <h2 id="today-title" class="hero-title">Today's Plan (Day 1)</h2>
+                        <p class="hero-subtitle">Here's what to eat today</p>
+                        <ul id="today-plan-list" class="meal-list"></ul>
+
+                        <section class="missing-wrap">
+                            <h3 class="mini-title">Missing ingredients</h3>
+                            <div id="missing-ingredients" class="chips-wrap"></div>
+                            <button id="grocery-btn" type="button" class="btn btn-secondary compact-btn">Generate Grocery List</button>
+                        </section>
+
+                        <div class="followup-wrap">
+                            <span class="caption">Did you follow today's plan?</span>
+                            <div class="action-row">
+                                <button id="follow-yes" type="button" class="btn btn-secondary compact-btn">Yes</button>
+                                <button id="follow-no" type="button" class="btn btn-secondary compact-btn">No</button>
+                            </div>
+                            <p id="follow-status" class="status-text"></p>
+                        </div>
+                    </section>
+
+                    <section class="primary-action">
+                        <button id="generate-plan" type="button" class="btn btn-primary">Generate New Plan</button>
+                        <p id="ai-loading" class="ai-loading" aria-live="polite"></p>
+                    </section>
+
+                    <section class="card weekly-section">
+                        <div class="weekly-head">
+                            <h2 class="section-title">Weekly Plan</h2>
+                            <button id="week-toggle" type="button" class="btn btn-secondary compact-btn">View Full Week</button>
+                        </div>
+                        <div id="weekly-wrapper" class="weekly-wrapper is-collapsed">
+                            <div id="weekly-plan-grid" class="weekly-grid"></div>
+                        </div>
+                    </section>
+
+                    <section class="card insights-section">
+                        <h2 class="section-title">Smart Insights</h2>
+                        <ul id="insights-list" class="insights-list"></ul>
+                    </section>
+
+                    <button id="restart-flow" type="button" class="btn btn-secondary restart-btn">Restart flow</button>
+                </article>
+            </section>
+        </main>
+    </div>
+
+    <div id="cook-modal" class="modal-backdrop" aria-hidden="true">
+        <article class="modal-card" role="dialog" aria-modal="true" aria-labelledby="cook-title">
+            <div class="modal-head">
+                <h3 id="cook-title" class="section-title">Cook Mode</h3>
+                <button id="close-modal" type="button" class="btn btn-secondary compact-btn">Close</button>
+            </div>
+            <p id="cook-meal-name" class="subtitle"></p>
+            <ol id="cook-steps" class="steps-list"></ol>
+        </article>
+    </div>
+
     <script src="script.js"></script>
 </body>
 </html>
